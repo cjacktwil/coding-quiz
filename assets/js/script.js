@@ -38,6 +38,10 @@ var initialsFormEl = document.getElementById("initials-form")
 var finalScore = document.getElementById("score");
 var finalScoreInitials = document.getElementById("initials");
 var submitButtonEl = document.getElementById("submit");
+var highScoreEl = document.getElementById("high-score");
+var highScoreGridEl = document.getElementById("high-score-grid");
+var goBackButton = document.getElementById("go-back");
+var clearScoreButton = document.getElementById("clear-score");
 //var button = document.createElement("button");
 var score = 0;
 var clock = 75;
@@ -46,10 +50,11 @@ var currentQuestion = 0;
 var countdown = function() {
     //var clock = 75;
     var intervalTimer = setInterval(function() {
-        clock--;
         countdownEl.innerText = ("Time: " + clock)
         //console.log(clock);
-        if (clock < 0) {
+        if (clock > 0) {
+            clock--;}
+        else {
             endGame();
     }
 },
@@ -145,38 +150,10 @@ var nextQuestion = function() {
     {endGame();
     }
     };
-//};
-
-// var reset = function() {
-//     //clock = 75;
-//     while (answersEl.firstChild) {
-//         answersEl.removeChild(answersEl.firstChild)
-//    }
-// };
-    //     if (answer.correct) {
-    //         //add to score and say "correct"
-    //     }
-    //     else {
-    //         //remove 10 seconds from time and say "wrong"
-    //     }
-    //     button.addEventListener("click", selectAnswer);
-    //     answerEl.appendChild(button);
-    // }
-    // };
-    //if (quizQuestions.answer) {
-    //alert("Correct!");
-    //score++;
-    //}
-    //else {
-    //    alert("Wrong!");
-    //}
-//};
-//askQuestion();
-// var selectAnswer = function() {
-
-// };
 
 var endGame = function() {
+    //debugger;
+    answersEl.setAttribute("class", "hide");
     questionEl.setAttribute("class", "hide");
     wrongEl.setAttribute("class", "hide");
     correctEl.setAttribute("class", "hide");
@@ -184,38 +161,52 @@ var endGame = function() {
     gameOverEl.removeAttribute("class", "hide");
     initialsFormEl.removeAttribute("class", "hide");
     finalScore.innerText = score;
-    //finalScore = score;
+    clock = 0;
+    clearInterval();
     submitButtonEl.addEventListener("click", saveScore);
+};
+
     var saveScore = function() {
+        //event.preventDefaul();
+//debugger;
+        var initials = document.querySelector("#initials").value;
+        var finalScore = score;
+        var finalScoreStored = localStorage.getItem("finalScore");
+        if (finalScore > finalScoreStored) {
     localStorage.setItem("finalScore", finalScore);
-    localStorage.setItem("initials", finalScoreInitials);
+    localStorage.setItem("initials", initials);
     }
     highScore();
-
-// H1 = All done!
-//display score
-//ask for initials
-//save to local storage
 };
 
 var highScore = function() {
-    var finalScore = localStorage.getItem("finalScore");
-    var finalScoreInitials = localStorage.getItem("initials");
-    if (!finalScore && !finalScoreInitials) {
-        return;
-    }
-    else {
-        
-    }
+    var finalScoreStored = localStorage.getItem("finalScore");
+    var finalScoreInitialsStored = localStorage.getItem("initials");
+        gameOverEl.setAttribute("class", "hide");
+        initialsFormEl.setAttribute("class", "hide");
+        highScoreEl.removeAttribute("class", "hide");
+        highScoreGridEl.removeAttribute("class", "hide");
+        highScoreGridEl.innerText = "1. " + finalScoreInitialsStored + " - " + finalScoreStored;
+        goBackButton.removeAttribute("class", "hide");
+        goBackButton.addEventListener("click", restart)
+        clearScoreButton.removeAttribute("class", "hide");
+        clearScoreButton.addEventListener("click", clearScore);
+
+    };
     //display high score
 //two buttons: go Bac (start over) and clear high scores
-};
 
 var restart = function() {
 
-}
+};
+
+var clearScore = function() {
+
+};
 
 startButton.addEventListener("click", countdown);
 startButton.addEventListener("click", startGame);
 //answersEl.addEventListener("click", selectAnswer);
+
+
 
