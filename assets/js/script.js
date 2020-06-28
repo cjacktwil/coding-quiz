@@ -33,9 +33,15 @@ var countdownEl = document.getElementById("timer");
 var correctEl = document.getElementById("correct");
 var wrongEl = document.getElementById("wrong");
 var resultEl = document.getElementById("result");
+var gameOverEl = document.getElementById("end-game")
+var initialsFormEl = document.getElementById("initials-form")
+var finalScore = document.getElementById("score");
+var finalScoreInitials = document.getElementById("initials");
+var submitButtonEl = document.getElementById("submit");
 //var button = document.createElement("button");
 var score = 0;
 var clock = 75;
+var currentQuestion = 0;
 
 var countdown = function() {
     //var clock = 75;
@@ -44,8 +50,7 @@ var countdown = function() {
         countdownEl.innerText = ("Time: " + clock)
         //console.log(clock);
         if (clock < 0) {
-            clearInterval();
-          //  endGame();
+            endGame();
     }
 },
 1000);
@@ -63,24 +68,28 @@ var setQuestion = function() {
     //reset();
     questionEl.removeAttribute("class", "hide")
     answersEl.removeAttribute("class", "hide");
+    //var q = quizQuestions[currentQuestion];
         askQuestion();
 }
 
 var askQuestion = function() {
-for (i = 0; i < quizQuestions.length; i++) {
+//for (i = 0; i < quizQuestions.length; i++) {
     //debugger;
     //questionEl.removeAttribute("class", "hide");
     //answersEl.removeAttribute("class", "hide");
-    questionEl.innerText = quizQuestions[i].question;
+    questionEl.innerText = quizQuestions[currentQuestion].question;
     showAnswers();
      };
         //button.addEventListener("click", selectAnswer);
-};
+
 
 var showAnswers = function() {
     //answerElA.innerText = quizQuestions[i].answer1;
     //answer();
-        quizQuestions[i].answers.forEach(answer => {
+        correctEl.setAttribute("class", "hide");
+        wrongEl.setAttribute("class", "hide");
+        resultEl.setAttribute("class", "hide");
+        quizQuestions[currentQuestion].answers.forEach(answer => {
         //answerElA.removeAttribute("class", "hide");
         var button = document.createElement("button");    
         button.innerText = answer.text;
@@ -88,11 +97,11 @@ var showAnswers = function() {
             // if (answer.correct) {
             //     button.dataset.correct = answer.correct
             // }
-        button.addEventListener("click", selectAnswer);    
+        //button.addEventListener("click", selectAnswer);    
         answersEl.appendChild(button);
         button.value = answer.correct;
          });
-         debugger;
+         //debugger;
         selectAnswer();
 };
 
@@ -101,7 +110,7 @@ var showAnswers = function() {
 
 
 var selectAnswer = function() {
-    answersEl.on("click", checkAnswer);
+    answersEl.addEventListener("click", checkAnswer);
     // console.log(event.target);
     // checkAnswer();
 };
@@ -116,7 +125,8 @@ var checkAnswer = function(event) {
         console.log(score);
     }
     else {
-        clock =-10;
+        clock -= 10;
+        console.log(clock);
         resultEl.removeAttribute("class", "hide");
         wrongEl.removeAttribute("class", "hide");
     }
@@ -124,12 +134,17 @@ var checkAnswer = function(event) {
 };
 
 var nextQuestion = function() {
-    correctEl.setAttribute("class", "hide");
-    wrongEl.setAttribute("class", "hide");
-    resultEl.setAttribute("class", "hide");
-    answersEl.setAttribute("class", "hide");
+    while (answersEl.firstChild) {
+        answersEl.removeChild(answersEl.firstChild)
+    };
+    if (currentQuestion < quizQuestions.length - 1) {
+    currentQuestion++;
     setQuestion();
-}
+     }
+    else
+    {endGame();
+    }
+    };
 //};
 
 // var reset = function() {
@@ -161,12 +176,46 @@ var nextQuestion = function() {
 
 // };
 
-// var endGame = function() {
+var endGame = function() {
+    questionEl.setAttribute("class", "hide");
+    wrongEl.setAttribute("class", "hide");
+    correctEl.setAttribute("class", "hide");
+    resultEl.setAttribute("class", "hide");
+    gameOverEl.removeAttribute("class", "hide");
+    initialsFormEl.removeAttribute("class", "hide");
+    finalScore.innerText = score;
+    //finalScore = score;
+    submitButtonEl.addEventListener("click", saveScore);
+    var saveScore = function() {
+    localStorage.setItem("finalScore", finalScore);
+    localStorage.setItem("initials", finalScoreInitials);
+    }
+    highScore();
 
-// };
+// H1 = All done!
+//display score
+//ask for initials
+//save to local storage
+};
 
+var highScore = function() {
+    var finalScore = localStorage.getItem("finalScore");
+    var finalScoreInitials = localStorage.getItem("initials");
+    if (!finalScore && !finalScoreInitials) {
+        return;
+    }
+    else {
+        
+    }
+    //display high score
+//two buttons: go Bac (start over) and clear high scores
+};
+
+var restart = function() {
+
+}
 
 startButton.addEventListener("click", countdown);
 startButton.addEventListener("click", startGame);
-answersEl.addEventListener("click", selectAnswer);
+//answersEl.addEventListener("click", selectAnswer);
 

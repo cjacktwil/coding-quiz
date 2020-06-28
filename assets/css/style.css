@@ -59,7 +59,7 @@ h1 {
     align-items: center;
 }
 
-.instructions {
+.instructions, .end-game {
     text-align: center;
 }
 
