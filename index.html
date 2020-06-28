@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="high-score">
-            View High Scores
+            <href src="#">View High Scores</href>
         </div>
         <div class="timer" id="timer">Time:</div>
     </header>
@@ -18,21 +18,24 @@
         <div class="instructions" id="instructions">
             <h1 class="headline" id="headline">Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answsers will penalize your score/time by 10 seconds.</p>
+            <div class="controls">
+                <button class="start btn" id="start">START</button>
+            </div>
         </div>
-        <div class="controls">
-            <button class="start" id="start">START</button>
-            <button class="next hide" id="next">NEXT</button>
-        </div>
-        <div class="hide" id="question"></div>
+        <div class="question hide" id="question"></div>
         <div class="answers hide" id="answers">
-            <button class="btn" id="text, a">Test 1</button>
-            <button class="btn" id="b">Test 2</button>
-            <button class="btn" id="c">Test 3</button>
-            <button class="btn" id="d">Test 4</button>
+           <!-- <button class="btn" id="text a"></button>
+            <button class="btn" id="b"></button>
+            <button class="btn" id="c"></button>
+            <button class="btn" id="d"></button>-->
+        </div>
+        <div class="result hide" id="result">
+            <hr />
+            <h2 class="correct hide" id="correct">Correct!</h2>
+            <h2 class="wrong hide" id="wrong">Wrong!</h2>
         </div>
         </div>  
     </main>
-    <h1>Hello</h1>
     <script src="./assets/js/script.js"></script>   
 </body>
 </html>

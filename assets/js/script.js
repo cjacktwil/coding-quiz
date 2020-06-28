@@ -23,45 +23,131 @@ var quizQuestions = [
             {text: "d, answer 4", correct: false}
         ]
     }
-]
+];
 var startButton = document.getElementById("start");
 var instructions = document.getElementById("instructions");
 var questionEl = document.getElementById("question");
-var answerEl = document.getElementById("answers");
+var answerElA = document.getElementById("a");
+var answersEl = document.getElementById("answers");
 var countdownEl = document.getElementById("timer");
+var correctEl = document.getElementById("correct");
+var wrongEl = document.getElementById("wrong");
+var resultEl = document.getElementById("result");
+//var button = document.createElement("button");
+var score = 0;
+var clock = 75;
+
+var countdown = function() {
+    //var clock = 75;
+    var intervalTimer = setInterval(function() {
+        clock--;
+        countdownEl.innerText = ("Time: " + clock)
+        //console.log(clock);
+        if (clock < 0) {
+            clearInterval();
+          //  endGame();
+    }
+},
+1000);
+};
 
 var startGame = function() {
+    //debugger;
     console.log("Game has begun!");
     startButton.setAttribute("class", "hide");
     instructions.setAttribute("class", "hide");
-    askQuestion()
+    setQuestion()
 };
 
-// var setQuestion = function() {
-//     questionEl.removeAttribute("class", "hide")
-// }
+var setQuestion = function() {
+    //reset();
+    questionEl.removeAttribute("class", "hide")
+    answersEl.removeAttribute("class", "hide");
+        askQuestion();
+}
 
-var askQuestion = function(){
+var askQuestion = function() {
 for (i = 0; i < quizQuestions.length; i++) {
     //debugger;
-    questionEl.removeAttribute("class", "hide");
+    //questionEl.removeAttribute("class", "hide");
+    //answersEl.removeAttribute("class", "hide");
     questionEl.innerText = quizQuestions[i].question;
-    //answerElA.innerText = quizQuestions[i].answers;
-    quizQuestions[i].answers.forEach(answer);
-    var answer = function() {
-        var button = document.createElement("button")
-        button.innerText = answer.text
-        button.setAttribute("class", "btn");
-        if (answer.correct) {
-            //add to score and say "correct"
-        }
-        else {
-            //remove 10 seconds from time and say "wrong"
-        }
-        button.addEventListener("click", selectAnswer);
-        answerEl.appendChild(button);
+    showAnswers();
+     };
+        //button.addEventListener("click", selectAnswer);
+};
+
+var showAnswers = function() {
+    //answerElA.innerText = quizQuestions[i].answer1;
+    //answer();
+        quizQuestions[i].answers.forEach(answer => {
+        //answerElA.removeAttribute("class", "hide");
+        var button = document.createElement("button");    
+        button.innerText = answer.text;
+            button.setAttribute("class", "btn");
+            // if (answer.correct) {
+            //     button.dataset.correct = answer.correct
+            // }
+        button.addEventListener("click", selectAnswer);    
+        answersEl.appendChild(button);
+        button.value = answer.correct;
+         });
+         debugger;
+        selectAnswer();
+};
+
+//answersEl.addEventListener("click", selectAnswer);
+
+
+
+var selectAnswer = function() {
+    answersEl.on("click", checkAnswer);
+    // console.log(event.target);
+    // checkAnswer();
+};
+
+var checkAnswer = function(event) {
+    var selectedButton = event.target;
+    //var correct = selectedButton.dataset.correct;
+    if (selectedButton.value === "true") {
+        score++;
+        correctEl.removeAttribute("class", "hide");
+        resultEl.removeAttribute("class", "hide");
+        console.log(score);
     }
-    };
+    else {
+        clock =-10;
+        resultEl.removeAttribute("class", "hide");
+        wrongEl.removeAttribute("class", "hide");
+    }
+    nextQuestion();
+};
+
+var nextQuestion = function() {
+    correctEl.setAttribute("class", "hide");
+    wrongEl.setAttribute("class", "hide");
+    resultEl.setAttribute("class", "hide");
+    answersEl.setAttribute("class", "hide");
+    setQuestion();
+}
+//};
+
+// var reset = function() {
+//     //clock = 75;
+//     while (answersEl.firstChild) {
+//         answersEl.removeChild(answersEl.firstChild)
+//    }
+// };
+    //     if (answer.correct) {
+    //         //add to score and say "correct"
+    //     }
+    //     else {
+    //         //remove 10 seconds from time and say "wrong"
+    //     }
+    //     button.addEventListener("click", selectAnswer);
+    //     answerEl.appendChild(button);
+    // }
+    // };
     //if (quizQuestions.answer) {
     //alert("Correct!");
     //score++;
@@ -69,29 +155,18 @@ for (i = 0; i < quizQuestions.length; i++) {
     //else {
     //    alert("Wrong!");
     //}
-};
+//};
 //askQuestion();
-var selectAnswer = function() {
+// var selectAnswer = function() {
 
-}
+// };
 
-var endGame = function() {
+// var endGame = function() {
 
-};
+// };
 
-var countdown = function() {
-    var clock = 75;
-    var intervalTimer = setInterval(function() {
-        clock--;
-        countdownEl.innerText = ("Time: " + clock)
-        //console.log(clock);
-        if (clock < 0) {
-            //clearInterval();
-          //  endGame();
-    }
-},
-1000);
-};
 
-startButton.addEventListener('click', startGame);
-startButton.addEventListener('click', countdown);
+startButton.addEventListener("click", countdown);
+startButton.addEventListener("click", startGame);
+answersEl.addEventListener("click", selectAnswer);
+

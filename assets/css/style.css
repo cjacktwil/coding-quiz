@@ -36,8 +36,16 @@ main {
     /*height: 100vh;*/
 }
 
+h1 {
+    font-family: franlin 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: x-large;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
 .high-score {
     float: left;
+    color: violet
 }
 
 .timer {
@@ -51,6 +59,10 @@ main {
     align-items: center;
 }
 
+.instructions {
+    text-align: center;
+}
+
 .answers {
     display: grid;
     grid-template-columns: 1;
@@ -62,8 +74,8 @@ main {
     background-color: blueviolet;
     color: white;
     border-radius: 5px;
-    width: 50%;
-    margin-top: 5px;
+    width: 60%;
+    margin: 5px 0 10px;
     text-align: left;
     padding: 5px;
     font-size: large;
@@ -72,9 +84,14 @@ main {
 
 .btn:hover {
     background-color: rgba(146, 48, 238, .75);
+    border-radius: 5px;
 }
 
-.start, .next {
+.controls {
+    padding: 10px;
+}
+
+.start {
     background-color: blueviolet;
     color: white;
     border-radius: 5px;
@@ -82,16 +99,17 @@ main {
     margin-top: 5px;
     text-align: center;
     padding: 10px;
-    font-size: x-large;
+    font-size: large;
 }
 
 .hide {
     display: none;
 }
-h1 {
-    font-family: franlin 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: large;
-    font-weight: bold;
-    line-height: 1.5;
+
+.correct, .wrong {
+    font-weight: normal;
+    font-style: italic;
+    margin-top: 10px;
 }
+
 
