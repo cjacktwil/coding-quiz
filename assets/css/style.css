@@ -1,0 +1,97 @@
+/* add style to look like challenge layout:
+top left - high score link
+top right - time reverse counter
+centered horizontally and vertically, box for questions
+first - h1 headline + instructions in p - button to start quiz
+questions are left-fustified in h2
+answers are in shaded boxes, left-justified under questions
+line and result from answer under answers
+hover effect on anwers
+after quiz is complete, results posted in h3
+box for initials and submit button
+save data to local machine with score and initials
+final slide shows high scores with buttons for go back or clear high scores
+*/
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif; 
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+    /*display: ;*/
+    /*justify-content: stretch;*/
+}
+
+main {
+    padding: 100px;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    /*height: 100vh;*/
+}
+
+.high-score {
+    float: left;
+}
+
+.timer {
+    float: right;
+}
+
+.container {
+    width: 800px;
+    max-width: 80%;
+    justify-content: left;
+    align-items: center;
+}
+
+.answers {
+    display: grid;
+    grid-template-columns: 1;
+    justify-items: left;
+    gap: 5px;
+}
+
+.btn {
+    background-color: blueviolet;
+    color: white;
+    border-radius: 5px;
+    width: 50%;
+    margin-top: 5px;
+    text-align: left;
+    padding: 5px;
+    font-size: large;
+
+}
+
+.btn:hover {
+    background-color: rgba(146, 48, 238, .75);
+}
+
+.start, .next {
+    background-color: blueviolet;
+    color: white;
+    border-radius: 5px;
+    width: 25%;
+    margin-top: 5px;
+    text-align: center;
+    padding: 10px;
+    font-size: x-large;
+}
+
+.hide {
+    display: none;
+}
+h1 {
+    font-family: franlin 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: large;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
