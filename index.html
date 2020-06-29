@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="high-score">
-            <href src="#">View High Scores</href>
+    <header class="header">
+        <div class="high-score">View High Scores</div>
         </div>
         <div class="timer" id="timer">Time:</div>
     </header>
@@ -23,32 +22,31 @@
             </div>
         </div>
         <div class="question hide" id="question"></div>
-        <div class="answers hide" id="answers">
-           <!-- <button class="btn" id="text a"></button>
-            <button class="btn" id="b"></button>
-            <button class="btn" id="c"></button>
-            <button class="btn" id="d"></button>-->
-        </div>
+        <div class="answers hide" id="answers"></div>
         <div class="result hide" id="result">
+            <br />
             <hr />
             <h2 class="correct hide" id="correct">Correct!</h2>
             <h2 class="wrong hide" id="wrong">Wrong!</h2>
         </div>
-        </div>
+        <div class="final-section">
         <div class="end-game hide" id="end-game">
-            <h1>All done!</h1>
-            <h2>Your final score is <span id="score"></span>!</h2>
-        </div>
-        <div class="initials-form hide" id="initials-form">
-            <h2>Please enter your initials:</h2>
-            <input name="initials" id="initials">
-            <button class="btn" id="submit">SUBMIT</button>
+               <h1>All done!</h1>
+                <h2>Your final score is <span id="score"></span>!</h2>
+            <div class="initials-form hide" id="initials-form">
+                <h2>Please enter your initials:</h2>
+                <input name="initials" id="initials">
+                <button class="btn" id="submit">SUBMIT</button>
+            </div>
         </div>  
-        <div class="high-score hide" id="high-score">
-            <h2>High Scores</h2>
+        <br/>
+        <div class="high-score-container hide" id="high-score">
+            <h1>High Scores</h1>
             <div class="high-score-grid hide" id="high-score-grid"></div>
-            <button class="btn-small hide" id="go-back">Go Back</button>
-            <button class="btn-small hide" id="clear-score">Clear High Scores</button>
+            <button class="btn hide" id="go-back">Go Back</button>
+            <button class="btn hide" id="clear-score">Clear High Scores</button>
+        </div>
+        </div>
         </div>
     </main>
     <script src="./assets/js/script.js"></script>   
